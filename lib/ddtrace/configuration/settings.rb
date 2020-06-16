@@ -32,7 +32,12 @@ module Datadog
       end
 
       settings :diagnostics do
-        option :debug, default: false
+        option :debug do |o|
+          o.default false
+          o.on_set do |value|
+            require 'pp' if value
+          end
+        end
 
         settings :health_metrics do
           option :enabled do |o|
